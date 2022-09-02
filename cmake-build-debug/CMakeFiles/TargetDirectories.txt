@@ -1,0 +1,3 @@
+/Users/alexanderallis/CLionProjects/Gale-Shapely/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/alexanderallis/CLionProjects/Gale-Shapely/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/alexanderallis/CLionProjects/Gale-Shapely/cmake-build-debug/CMakeFiles/Gale_Shapely.dir
