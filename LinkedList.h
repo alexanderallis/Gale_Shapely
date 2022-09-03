@@ -5,17 +5,20 @@
 #ifndef GALE_SHAPELY_LINKEDLIST_H
 #define GALE_SHAPELY_LINKEDLIST_H
 
+#include "Node.h"
 
 class LinkedList {
     public:
         LinkedList();
+        ~LinkedList();
         void add(int);
+        void addTail(int);
         int* pop();
         int empty() const;
 
-        Node* listPointer{};
-
     private:
+        Node* listPointer{};
+        Node* tail{};
         int hasNext() const;
 };
 

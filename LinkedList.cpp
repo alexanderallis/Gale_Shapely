@@ -10,13 +10,28 @@
 
 LinkedList::LinkedList() {
     this -> listPointer = nullptr;
+    this -> tail = nullptr;
 }
 
 void LinkedList::add(int data) {
     Node* nodePointer = new Node;
+    if (listPointer == nullptr) this -> tail = nodePointer;  // if first node created, set tail
     nodePointer->data = data;
     nodePointer->next = listPointer;
     listPointer = nodePointer;
+}
+
+void LinkedList::addTail(int data) {
+    if (listPointer == nullptr) {
+        add(data);  // if the list is empty, invoke the normal add member function
+        return;
+    }
+    else{
+        Node* nodePointer = new Node;
+        this -> tail -> next = nodePointer;
+        this -> tail = nodePointer;
+        return;
+    }
 }
 
 int LinkedList::empty() const {
@@ -38,4 +53,14 @@ int* LinkedList::pop() {
         listPointer = listPointer -> next;
         return &(tmp -> data);
     }
+}
+
+LinkedList::~LinkedList() {
+    Node* next;
+    while(listPointer != nullptr){
+        next = listPointer -> next;
+        delete listPointer;
+        listPointer = next;
+    }
+
 }
