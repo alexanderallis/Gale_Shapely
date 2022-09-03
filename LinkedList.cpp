@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <vector>
 
 #include "Node.h"
 #include "LinkedList.h"
@@ -11,6 +12,12 @@
 LinkedList::LinkedList() {
     this -> listPointer = nullptr;
     this -> tail = nullptr;
+}
+
+LinkedList::LinkedList(std::vector<int> list) {
+    for(int i = 0; i < list.size(); i++) {
+        addTail(list.at(i));
+    }
 }
 
 void LinkedList::add(int data) {
@@ -28,6 +35,7 @@ void LinkedList::addTail(int data) {
     }
     else{
         Node* nodePointer = new Node;
+        nodePointer -> data = data;
         this -> tail -> next = nodePointer;
         this -> tail = nodePointer;
         return;
@@ -55,12 +63,12 @@ int* LinkedList::pop() {
     }
 }
 
-LinkedList::~LinkedList() {
-    Node* next;
-    while(listPointer != nullptr){
-        next = listPointer -> next;
-        delete listPointer;
-        listPointer = next;
-    }
+//LinkedList::~LinkedList() {
+//    Node* next;
+//    while(listPointer != nullptr){
+//        next = listPointer -> next;
+//        delete listPointer;
+//        listPointer = next;
+//    }
 
-}
+

@@ -9,6 +9,6 @@
 #include <fstream>
 #include "LinkedList.h"
 
-LinkedList* fileToList(std::string* fileName);
+std::vector<LinkedList>* fileToList(std::vector<LinkedList>*, std::string* fileName);
 
 #endif //GALE_SHAPELY_READ_FILE_H

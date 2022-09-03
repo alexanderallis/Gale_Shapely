@@ -5,16 +5,18 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <vector>
 
 #include "read_file.h"
 #include "LinkedList.h"
 
 using namespace std;
 
-LinkedList* fileToList(std::string* fileName){
+vector<LinkedList>* fileToList(vector<LinkedList>* malePreferencesList, std::string* fileName){
 
     string fileN = *fileName;
 
+    // Check if file exists
     ifstream inFile(fileN.c_str());  // Check to make sure file exists
     if (!inFile) {
         cout << "File not found." << endl;
@@ -28,43 +30,39 @@ LinkedList* fileToList(std::string* fileName){
         return nullptr;
     }
 
-    string line;  // placeholder for each line
     stringstream sStream;  // stream to parse each line
-    int rank;
+    string line;  // each line
+    int rank;  // each number
+    vector<int> currentList;  // integers read from each line
 
     getline(fileStream, line);  // Consume first line
 
-    int numberOfMen = stoi(line);
-    auto* malePrefLists = new LinkedList[numberOfMen];  // Create list of Linked Lists
-    for(int i = 0; i < numberOfMen; i++) malePrefLists[i] = LinkedList();
-
-    // TODO: Remove this.
-    cout << line << endl;  // Print to test
-
     int counter = 0;
-    while (!fileStream.eof()) {
-        malePrefLists[counter] = singlePreference;
-        getline(fileStream, line);
+    while (!fileStream.eof()) {  // Loop through lines
 
-        // TODO: Remove this.
-        cout << line << endl;  // Print line to test
+        getline(fileStream, line);
 
         if (!fileStream.fail()) {
             sStream << line;
-            while(!sStream.eof()) {
-                sStream >> rank;
-                cout << "The rank is: " << rank << endl;
-                // TODO: Add ranks to list of linked lists -back to front
-                malePrefLists[counter].addTail(rank);
+            while(!sStream.eof()) {  // Loop through numbers
+                if(!sStream.fail()) {
+                    sStream >> rank;
+                    currentList.push_back(rank);
+                }
             }
-            sStream.str(std::string());
+            malePreferencesList -> emplace_back(currentList);  // Construct linked list in last index of the vector
+
+            // Clean up
+            sStream.str(std::string());  // Clear string
             sStream.clear();  // Clear the state flags for eof()
+            currentList.clear();  // Clear contents of the vector just because
         }
+
         counter++;
     }
 
     fileStream.close();
 
-    return 0;
+    return malePreferencesList;
 
 };

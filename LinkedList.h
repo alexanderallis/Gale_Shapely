@@ -5,12 +5,14 @@
 #ifndef GALE_SHAPELY_LINKEDLIST_H
 #define GALE_SHAPELY_LINKEDLIST_H
 
+#include <vector>
 #include "Node.h"
 
 class LinkedList {
     public:
         LinkedList();
-        ~LinkedList();
+        explicit LinkedList(std::vector<int>);
+//        ~LinkedList();
         void add(int);
         void addTail(int);
         int* pop();
