@@ -12,7 +12,7 @@
 
 using namespace std;
 
-vector<LinkedList>* fileToList(vector<LinkedList>* malePreferencesList, std::string* fileName){
+vector<vector<int>>* fileToVector(vector<vector<int>>* arr, std::string* fileName) {
 
     string fileN = *fileName;
 
@@ -31,14 +31,14 @@ vector<LinkedList>* fileToList(vector<LinkedList>* malePreferencesList, std::str
     }
 
     stringstream sStream;  // stream to parse each line
-    string line;  // each line
+    string line;  // each line (string)
+    vector<int> row;  // each line (int)
     int rank;  // each number
-    vector<int> currentList;  // integers read from each line
 
     getline(fileStream, line);  // Consume first line
+    int numberOfMen = stoi(line);
 
-    int counter = 0;
-    while (!fileStream.eof()) {  // Loop through lines
+    while(!fileStream.eof()) {  // Loop through lines
 
         getline(fileStream, line);
 
@@ -47,22 +47,31 @@ vector<LinkedList>* fileToList(vector<LinkedList>* malePreferencesList, std::str
             while(!sStream.eof()) {  // Loop through numbers
                 if(!sStream.fail()) {
                     sStream >> rank;
-                    currentList.push_back(rank);
+                    row.push_back(rank);
                 }
             }
-            malePreferencesList -> emplace_back(currentList);  // Construct linked list in last index of the vector
+            arr -> push_back(row);  // Construct linked list in last index of the vector
 
             // Clean up
             sStream.str(std::string());  // Clear string
             sStream.clear();  // Clear the state flags for eof()
-            currentList.clear();  // Clear contents of the vector just because
+            for (int &k: row) {    // Clear contents of the vector
+                row.clear();
+            }
         }
-
-        counter++;
     }
 
     fileStream.close();
+    return arr;
+};
+
+vector<LinkedList>* vectorToLinkedList(vector<LinkedList>* malePreferencesList, vector<vector<int>>* arr) {
+
+    unsigned int squareSize = arr -> size();
+
+    for(int i = 0; i < squareSize; i++) {
+        malePreferencesList -> emplace_back(arr -> at(i));
+    }
 
     return malePreferencesList;
-
-};
+}

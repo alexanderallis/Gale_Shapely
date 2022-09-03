@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 
-#include "Node.h"
 #include "LinkedList.h"
 #include "Stack.h"
 #include "read_file.h"
@@ -13,12 +12,14 @@ int main() {
     // Read File
     std::string fileName = "test_preferences.txt";
     vector<LinkedList> malePreferences;
+    vector<vector<int>> preferencesArr;
 
-    // Read file and check for errors. If error, return 1.
-    if(fileToList(&malePreferences, &fileName) == nullptr) {
+    if(fileToVector(&preferencesArr, &fileName) == nullptr) {
         return 1;
     }
     else {
+        vectorToLinkedList(&malePreferences, &preferencesArr);
+
         const unsigned int NUM_MEN = malePreferences.size();
 
         // People
@@ -44,13 +45,3 @@ int main() {
     }
 
 }
-
-//int main() {
-
-//    return 0;
-//}
-
-
-//LinkedList l;
-//
-//for(int i = 1; i < 11; i++) l.add(i);
