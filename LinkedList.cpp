@@ -30,7 +30,7 @@ void LinkedList::add(int data) {
 
 void LinkedList::addTail(int data) {
     if (listPointer == nullptr) {
-        add(data);  // if the list is empty, invoke the normal add member function
+        add(data);  // if the list is isEmpty, invoke the normal add member function
         return;
     }
     else{
@@ -42,7 +42,7 @@ void LinkedList::addTail(int data) {
     }
 }
 
-int LinkedList::empty() const {
+int LinkedList::isEmpty() const {
     if (this -> listPointer != nullptr) return 1;
     else return 0;
 }
@@ -52,15 +52,10 @@ int LinkedList::hasNext() const {
     else return 0;
 }
 
-int* LinkedList::pop() {
-    if (listPointer == nullptr) {
-        return nullptr;
-    }
-    else{
-        Node* tmp = listPointer;
-        listPointer = listPointer -> next;
-        return &(tmp -> data);
-    }
+int LinkedList::pop() {
+    Node* tmp = listPointer;
+    listPointer = listPointer -> next;
+    return (tmp -> data);
 }
 
 //LinkedList::~LinkedList() {

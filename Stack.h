@@ -12,7 +12,7 @@ public:
     Stack(int);
     ~Stack() { delete[] stackArr; }
     void push(int num);
-    int * pop();
+    int pop();
     bool isEmpty() const;
     bool isFull() const;
 

@@ -22,13 +22,9 @@ void Stack::push(int num) {
     }
 }
 
-int* Stack::pop() {
-    if(isEmpty()) {
-        return nullptr;
-    }
-    else {
-        return &(this -> stackArr[this -> pointer--]);
-    }
+int Stack::pop() {
+    if(isEmpty()) return -1;
+    return (this -> stackArr[this -> pointer--]);
 }
 
 bool Stack::isEmpty() const {

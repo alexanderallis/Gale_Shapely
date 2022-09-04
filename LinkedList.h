@@ -15,8 +15,8 @@ class LinkedList {
 //        ~LinkedList();
         void add(int);
         void addTail(int);
-        int* pop();
-        int empty() const;
+        int pop();
+        int isEmpty() const;
 
     private:
         Node* listPointer{};
