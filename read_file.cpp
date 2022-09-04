@@ -47,7 +47,7 @@ vector<vector<int>>* fileToVector(vector<vector<int>>* arr, std::string* fileNam
             while(!sStream.eof()) {  // Loop through numbers
                 if(!sStream.fail()) {
                     sStream >> rank;
-                    row.push_back(rank);
+                    row.push_back(rank - 1);  // Subtract 1 to make everything zero-indexed
                 }
             }
             arr -> push_back(row);  // Construct linked list in last index of the vector
