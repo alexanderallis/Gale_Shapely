@@ -14,6 +14,7 @@ int main(int argc, char** argv) {
 
     string maleFileName = argv[3];
     string femaleFileName = argv[4];
+    string outputFileName = argv[5];
 
     // Read Male Preferences File
     vector<LinkedList> malePreferences;
@@ -57,7 +58,7 @@ int main(int argc, char** argv) {
     int freeMan = freeMen.pop();
     while(freeMan != -1) {  // If pop() returns -1 for a freeMan, the stack is empty
         highestWoman = malePreferences.at(freeMan).pop();
-        if(husband[highestWoman] == -1) {
+        if(husband[highestWoman] == -1) {  // If woman is not married, she marries freeMan and we pop another man from stack.
             husband[highestWoman] = freeMan;
             wife[freeMan] = highestWoman;
             if(!freeMen.isEmpty())
@@ -65,7 +66,7 @@ int main(int argc, char** argv) {
             else
                 break;
         }
-        else {
+        else {  // If woman is married, compare freeMan to current fiancee, deal accordingly.
             if(femalePreferenceArr.at(highestWoman).at(freeMan) > femalePreferenceArr.at(highestWoman).at(husband[highestWoman])) {
                 int temp = husband[highestWoman];
                 husband[highestWoman] = freeMan;
@@ -75,7 +76,16 @@ int main(int argc, char** argv) {
         }
     }
 
-    // Output pairs
+    // Write output to file
+    ofstream outputFS;
+    outputFS.open(outputFileName);
+    if(!outputFS.is_open()) {
+        cout << "Error with output file." << endl;
+    }
+
+    for(int i : wife) {
+        outputFS << i << " " << wife[i] << endl;
+    }
 
     return 0;
 
