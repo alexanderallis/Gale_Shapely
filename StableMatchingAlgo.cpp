@@ -31,16 +31,18 @@ vector<int> stableMatchingAlgorithm (std::vector<LinkedList> malePreferences, st
     int freeMan = freeMen.pop();
     while(freeMan != -1) {  // If pop() returns -1 for a freeMan, the stack is empty
         highestWoman = malePreferences.at(freeMan).pop();
-        if(husband[highestWoman] == -1) {  // If woman is not married, she marries freeMan and we pop another man from stack.
+        if(husband[highestWoman] == -1) {  // If woman is not married, she marries freeMan, and we pop another man from stack.
             husband[highestWoman] = freeMan;
             wife[freeMan] = highestWoman;
             if(!freeMen.isEmpty())
-            freeMan = freeMen.pop();
+                freeMan = freeMen.pop();
             else
-            break;
+                break;
         }
         else {  // If woman is married, compare freeMan to current fiancée, deal accordingly.
-            if(femalePreferenceArr.at(highestWoman).at(freeMan) > femalePreferenceArr.at(highestWoman).at(husband[highestWoman])) {
+            int femManRank = femalePreferenceArr.at(highestWoman).at(freeMan);
+            int femHusRank = femalePreferenceArr.at(highestWoman).at(husband[highestWoman]);
+            if(femManRank < femHusRank) {
                 int temp = husband[highestWoman];
                 husband[highestWoman] = freeMan;
                 wife[freeMan] = highestWoman;

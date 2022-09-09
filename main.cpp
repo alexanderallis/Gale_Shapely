@@ -10,7 +10,7 @@
 
 using namespace std;
 
-int main(int argc, char** argv) {  //Reconfiguring main()
+int main(int argc, char** argv) {
 
     // Get arguments from console
     for (int i = 0; i < argc; ++i)
