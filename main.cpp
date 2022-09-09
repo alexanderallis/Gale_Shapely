@@ -11,7 +11,7 @@
 
 using namespace std;
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv) {  //Reconfiguring main()
 
     for (int i = 0; i < argc; ++i)
         cout << "arg " << i << ": " << argv[i] << "\n";
