@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <sstream>
 #include <vector>
 
 #include "LinkedList.h"
@@ -13,6 +12,7 @@ using namespace std;
 
 int main(int argc, char** argv) {  //Reconfiguring main()
 
+    // Get arguments from console
     for (int i = 0; i < argc; ++i)
         cout << "arg " << i << ": " << argv[i] << "\n";
 
@@ -30,59 +30,58 @@ int main(int argc, char** argv) {  //Reconfiguring main()
     // Read Female Preferences File
     vector<vector<int>> femalePreferenceArr;
     if(fileToVector(&femalePreferenceArr, &femaleFileName) == nullptr) return 1;
-    unsigned int numberOfWomen = femalePreferenceArr.size();
     femalePreferenceArr = *invertList(&femalePreferenceArr);
 
     const unsigned int NUM_MEN = malePreferences.size();
+    const unsigned int NUM_WOMEN = femalePreferenceArr.size();
 
     // People
     int men[NUM_MEN];
     for (int i = 0; i < NUM_MEN; i++) men[i] = i;
-    int women[NUM_MEN];
+    int women[NUM_WOMEN];
     for (int i = 0; i < NUM_MEN; i++) women[i] = i;
+
+    // Run
     if(programType == "stable") {
-        string outputFileName = fourthArg;
+
         // Call Stable Matching Function
         vector<int> pairs;  // defined as index:value = man:woman
         pairs = stableMatchingAlgorithm(malePreferences, femalePreferenceArr, men, women);
 
-        // Stable Matching Output
+        // Output
         ofstream outputFS;
-        outputFS.open(outputFileName);
+        outputFS.open(fourthArg);  // fourthArg = output file name
         if(!outputFS.is_open()) {
             cout << "Error with output file." << endl;
         }
-
-        int manNum;
-        int womanNum;
         for(int i = 0; i < NUM_MEN; i++) {
-            manNum = i + 1;  // Convert to non-zero-indexed numbers
-            womanNum = pairs.at(i) + 1;
-            outputFS << manNum << " " << womanNum << endl;
+            outputFS << i + 1 << " " << pairs.at(i) + 1 << endl;  // Convert to non-zero-indexed numbers
         }
+
+        outputFS.close();
+
     }
     else if(programType == "check") {
-        string pairsFileName = fourthArg;
+
         std::vector<std::vector<int>> pairs;
-        pairs = *getPairsFromFile(&pairs, &pairsFileName);
-//        int numCouples = (int) pairs.size();
+        pairs = *getPairsFromFile(&pairs, &fourthArg);
 
         // Check for matching property
         vector<int> menCount(NUM_MEN);
         fill(menCount.begin(), menCount.end(), 0);
         vector<int> womenCount(NUM_MEN);
         fill(womenCount.begin(), womenCount.end(), 0);
-        bool monogamy = true;
+        bool matching = true;
         if(NUM_MEN > 0) {
             for(auto & pair : pairs) {
                 if(++menCount.at(pair.at(0)) > 1) {
-                    monogamy = false;
+                    matching = false;
                 }
                 if(++womenCount.at(pair.at(1)) > 1) {
-                    monogamy = false;
+                    matching = false;
                 }
             }
-            if(monogamy) {
+            if(matching) {
                 cout << "Pairs have perfect matching." << endl;
             }
             else {
@@ -94,10 +93,12 @@ int main(int argc, char** argv) {  //Reconfiguring main()
         }
 
         // Check for perfection
+        bool perfect;
+        if(NUM_MEN == NUM_WOMEN) perfect = true;
+        else{ cout << "The matching set S does not hold the property of perfection." << endl; }
 
-
-        // Check pair stability if perfection holds
-        if(monogamy) {
+        // Check pair stability if matching & perfection are true
+        if(matching && perfect) {
             vector<vector<int>> unstablePairs = checkPairStability(&malePreferencesArr, &femalePreferenceArr, &pairs);
             cout << "Unstable Pairs:" << endl;
             for(auto & unstablePair : unstablePairs) {

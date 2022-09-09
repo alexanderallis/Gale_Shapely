@@ -10,12 +10,12 @@ using namespace std;
 vector<int> stableMatchingAlgorithm (std::vector<LinkedList> malePreferences, std::vector<std::vector<int>> femalePreferenceArr, int* menArr, int* womenArr) {
 
     /*
-     * ----------------------------------------
-     * ----Stable Matching Algorithm Begins----
-     * ----------------------------------------
+     * -----------------------------------------
+     * ------- Stable Matching Algorithm -------
+     * -----------------------------------------
     */
 
-    unsigned int NUM_MEN = malePreferences.size();
+    int NUM_MEN = (int) malePreferences.size();
 
     // Marriages
     int wife[NUM_MEN];
@@ -39,7 +39,7 @@ vector<int> stableMatchingAlgorithm (std::vector<LinkedList> malePreferences, st
             else
             break;
         }
-        else {  // If woman is married, compare freeMan to current fiancee, deal accordingly.
+        else {  // If woman is married, compare freeMan to current fiancée, deal accordingly.
             if(femalePreferenceArr.at(highestWoman).at(freeMan) > femalePreferenceArr.at(highestWoman).at(husband[highestWoman])) {
                 int temp = husband[highestWoman];
                 husband[highestWoman] = freeMan;
