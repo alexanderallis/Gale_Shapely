@@ -1,20 +1,17 @@
 //
-// Created by Alexander Allis on 9/2/22.
+// Created by Alexander Allis on 9/5/22.
 //
-
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <vector>
-#include <fstream>
-#include <sstream>
+#include<string>
+#include<vector>
 
-#include "read_file.h"
-#include "LinkedList.h"
+#include "getPairsFromFile.h"
 
 using namespace std;
 
-vector<vector<int>>* fileToVector(vector<vector<int>>* arr, std::string* fileName) {
+vector<vector<int>>* getPairsFromFile(vector<vector<int>>* arr, std::string *fileName) {
 
     string fileN = *fileName;
 
@@ -36,9 +33,6 @@ vector<vector<int>>* fileToVector(vector<vector<int>>* arr, std::string* fileNam
     string line;  // each line (string)
     vector<int> row;  // each line (int)
     int rank;  // each number
-
-    getline(fileStream, line);  // Consume first line
-    int numberOfMen = stoi(line);
 
     while(!fileStream.eof()) {  // Loop through lines
 
@@ -65,15 +59,17 @@ vector<vector<int>>* fileToVector(vector<vector<int>>* arr, std::string* fileNam
 
     fileStream.close();
     return arr;
-};
 
-vector<LinkedList>* vectorToLinkedList(vector<LinkedList>* malePreferencesList, vector<vector<int>>* arr) {
+}
 
-    unsigned int squareSize = arr -> size();
-
-    for(int i = 0; i < squareSize; i++) {
-        malePreferencesList -> emplace_back(arr -> at(i));
+vector<vector<int>>* invertList(vector<vector<int>>* list) {
+    unsigned int size = list -> size();
+    vector<int> tempInverse(size, 0);  // Initialize a vector of length numberOfWomen with value 0
+    for(int i = 0; i < size; i++) {
+        for(int j = 0; j < size; j++) {
+            tempInverse.at(list -> at(i).at(j)) = j;
+        }
+        list -> at(i) = tempInverse;
     }
-
-    return malePreferencesList;
+    return list;
 }
