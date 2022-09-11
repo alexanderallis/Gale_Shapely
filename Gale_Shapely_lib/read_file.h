@@ -7,7 +7,7 @@
 
 //#include <string>
 //#include <fstream>
-#include "LinkedList.h"
+#include "Data_Structures/LinkedList.h"
 
 std::vector<LinkedList>* fileToList(std::vector<LinkedList>*, std::string* fileName);
 

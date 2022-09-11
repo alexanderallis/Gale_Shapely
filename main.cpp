@@ -2,11 +2,11 @@
 #include <fstream>
 #include <vector>
 
-#include "LinkedList.h"
-#include "read_file.h"
-#include "StableMatchingAlgo.h"
-#include "getPairsFromFile.h"
-#include "CheckPairStability.h"
+#include "Gale_Shapely_lib/Data_Structures/LinkedList.h"
+#include "Gale_Shapely_lib/read_file.h"
+#include "Gale_Shapely_lib/StableMatchingAlgo.h"
+#include "Gale_Shapely_lib/getPairsFromFile.h"
+#include "Gale_Shapely_lib/CheckPairStability.h"
 
 using namespace std;
 

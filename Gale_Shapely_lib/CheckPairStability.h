@@ -7,7 +7,7 @@
 
 #include<vector>
 
-#include "LinkedList.h"
+#include "Data_Structures/LinkedList.h"
 
 std::vector<std::vector<int>> checkPairStability(std::vector<std::vector<int>>*, std::vector<std::vector<int>>*, std::vector<std::vector<int>>*);
 
