@@ -7,6 +7,7 @@
 #include "Gale_Shapely_lib/StableMatchingAlgo.h"
 #include "Gale_Shapely_lib/getPairsFromFile.h"
 #include "Gale_Shapely_lib/CheckPairStability.h"
+#include "Gale_Shapely_lib/CheckForMatching.h"
 
 using namespace std;
 
@@ -66,31 +67,10 @@ int main(int argc, char** argv) {
         std::vector<std::vector<int>> pairs;
         pairs = *getPairsFromFile(&pairs, &fourthArg);
 
-        // Check for matching property
-        vector<int> menCount(NUM_MEN);
-        fill(menCount.begin(), menCount.end(), 0);
-        vector<int> womenCount(NUM_MEN);
-        fill(womenCount.begin(), womenCount.end(), 0);
-        bool matching = true;
-        if(NUM_MEN > 0) {
-            for(auto & pair : pairs) {
-                if(++menCount.at(pair.at(0)) > 1) {
-                    matching = false;
-                }
-                if(++womenCount.at(pair.at(1)) > 1) {
-                    matching = false;
-                }
-            }
-            if(matching) {
-                cout << "Pairs have perfect matching." << endl;
-            }
-            else {
-                cout << "Pairs do not have perfect matching." << endl;
-            }
-        }
-        else{
-            cout << "List of pairs are empty" << endl;
-        }
+        // Check for matching
+        bool matching = checkForMatching(pairs);
+        if(matching) cout << "Matching property holds" << endl;
+        else cout << "Matching property does not hold" << endl;
 
         // Check for perfection
         bool perfect;

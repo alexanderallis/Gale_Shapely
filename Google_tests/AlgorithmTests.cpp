@@ -7,6 +7,8 @@
 #include <vector>
 #include "../Gale_Shapely_lib/Data_Structures/LinkedList.h"
 #include "../Gale_Shapely_lib/StableMatchingAlgo.h"
+#include "../Gale_Shapely_lib/CheckPairStability.h"
+#include "../Gale_Shapely_lib/CheckForMatching.h"
 
 using namespace std;
 
@@ -17,24 +19,23 @@ protected:
     {
 
         // Establish n = number of men = number of women
-        n = 4;
+//        n = 1000;
 
         // Randomly generate vector of linked lists of male preferences
         LinkedList lList;
         vector<int> mPref;
 
-        for(int i = 0; i < n; i++) {  // For every man...
+        for(int i = 0; i < NUM_MEN; i++) {  // For every man...
 
-            for(int j = 0; j < n; j++) { mPref.emplace_back(j); }  // ...add preferences and shuffle...
+            for(int j = 0; j < NUM_MEN; j++) { mPref.emplace_back(j); }  // ...add preferences and shuffle...
             random_device randomDevice;
             default_random_engine randEngine(randomDevice());
             shuffle(mPref.begin(), mPref.end(), randEngine);
 
-            for(int j = 0; j < n; j++) { lList.addTail(mPref.at(j)); }  // ...add preferences to linked list
+            for(int j = 0; j < NUM_MEN; j++) { lList.addTail(mPref.at(j)); }  // ...add preferences to linked list
 
-            // TODO: Not writing Linked List successfully
-            malePreferences.emplace_back(lList);  // ...and linked list to the vector
-            malePreferenceVector.emplace_back(mPref);
+            malePreferences.emplace_back(mPref);  // ...and linked list to the vector
+            malePreferenceVector.push_back(mPref);
             lList.clearList();
             mPref.clear();
 
@@ -43,9 +44,9 @@ protected:
         // Randomly generate vector of vectors of female preferences
         vector<int> fPref;
 
-        for(int i = 0; i < n; i++) {  // For every woman...
+        for(int i = 0; i < NUM_MEN; i++) {  // For every woman...
 
-            for(int j = 0; j < n; j++) { fPref.push_back(j); }  // ...add preferences and shuffle...
+            for(int j = 0; j < NUM_MEN; j++) { fPref.push_back(j); }  // ...add preferences and shuffle...
             random_device randomDevice;
             default_random_engine randEngine(randomDevice());
             shuffle(fPref.begin(), fPref.end(), randEngine);
@@ -53,6 +54,9 @@ protected:
             femalePreferences.emplace_back(fPref);  // ...and add to vector
             fPref.clear();
         }
+
+        // Make list of men
+        for(int i = 0; i < NUM_MEN; i++) { men[i] = i; }
 
     }
 
@@ -62,31 +66,48 @@ protected:
     vector<LinkedList> malePreferences;
     vector<vector<int>> malePreferenceVector;
     vector<vector<int>> femalePreferences;
-    int n;
+    static const int NUM_MEN = 1000;  // Establish n = number of men = number of women
+    int men[NUM_MEN];
 };
 
-TEST_F(MatchingFixture, matchingPipelineTest) {
+TEST_F(MatchingFixture, matchingTest) {
 
-    // Create an array of men
-    int men[n];
-    for(int i = 0; i < n; n++) {
-        men[i] = i;
-    }
+    vector<int> pairs = stableMatchingAlgorithm(malePreferences, femalePreferences, men);
 
-    // Call Stable Matching Function
-    vector<int> pairs;  // defined as index:value = man:woman
-    pairs = stableMatchingAlgorithm(malePreferences, femalePreferences, men);
-
+    // Convert pairs into a vector of ordered pairs
     vector<vector<int>> orderedPairs;
-    orderedPairs.reserve(pairs.size());
+    vector<int> temp;
     for(auto i : pairs) {
-        orderedPairs.emplace_back((i, pairs.at(i)));
+        temp.push_back(i);
+        temp.push_back(pairs.at(i));
+        orderedPairs.push_back(temp);
+        temp.clear();
     }
 
-//    vector<vector<int>> unstablePairs = checkPairStability(&malePreferenceVector, &femalePreferences, &orderedPairs);
-
-//    ASSERT_TRUE(unstablePairs.empty());
-
-    int x = 2;
+    ASSERT_TRUE(checkForMatching(orderedPairs));
 
 }
+
+TEST_F(MatchingFixture, stabilityTest) {
+
+    // Call Stable Matching Function
+    // defined as index:value = man:woman
+    vector<int> pairs = stableMatchingAlgorithm(malePreferences, femalePreferences, men);
+
+    // Convert pairs into a vector of ordered pairs
+    vector<vector<int>> orderedPairs;
+    vector<int> temp;
+    for(auto i : pairs) {
+        temp.push_back(i);
+        temp.push_back(pairs.at(i));
+        orderedPairs.push_back(temp);
+        temp.clear();
+    }
+
+    // Call Check Pair Function
+    vector<vector<int>> unstablePairs = checkPairStability(&malePreferenceVector, &femalePreferences, &orderedPairs);
+
+    ASSERT_TRUE(unstablePairs.empty());
+
+}
+

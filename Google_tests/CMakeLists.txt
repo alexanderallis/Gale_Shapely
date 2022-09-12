@@ -23,7 +23,7 @@ add_library(I_O_lib
 add_library(GS_Algo_lib
         ../Gale_Shapely_lib/StableMatchingAlgo.cpp
         ../Gale_Shapely_lib/CheckPairStability.cpp
-        )
+        ../Gale_Shapely_lib/CheckForMatching.cpp ../Gale_Shapely_lib/CheckForMatching.h)
 
 target_link_libraries(Google_Tests_run data_structures_lib I_O_lib GS_Algo_lib)
 
