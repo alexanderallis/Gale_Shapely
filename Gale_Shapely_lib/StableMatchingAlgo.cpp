@@ -7,7 +7,7 @@
 
 using namespace std;
 
-vector<int> stableMatchingAlgorithm (std::vector<LinkedList> malePreferences, std::vector<std::vector<int>> femalePreferenceArr, int* menArr, int* womenArr) {
+vector<int> stableMatchingAlgorithm (std::vector<LinkedList> malePreferences, std::vector<std::vector<int>> invertedFemalePreferenceArr, int* menArr) {
 
     /*
      * -----------------------------------------
@@ -40,8 +40,8 @@ vector<int> stableMatchingAlgorithm (std::vector<LinkedList> malePreferences, st
                 break;
         }
         else {  // If woman is married, compare freeMan to current fiancée, deal accordingly.
-            int femManRank = femalePreferenceArr.at(highestWoman).at(freeMan);
-            int femHusRank = femalePreferenceArr.at(highestWoman).at(husband[highestWoman]);
+            int femManRank = invertedFemalePreferenceArr.at(highestWoman).at(freeMan);
+            int femHusRank = invertedFemalePreferenceArr.at(highestWoman).at(husband[highestWoman]);
             if(femManRank < femHusRank) {
                 int temp = husband[highestWoman];
                 husband[highestWoman] = freeMan;

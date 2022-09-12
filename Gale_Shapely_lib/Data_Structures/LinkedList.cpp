@@ -58,6 +58,15 @@ int LinkedList::pop() {
     return (tmp -> data);
 }
 
+void LinkedList::clearList() {
+    Node* next;
+    while(listPointer != nullptr){
+        next = listPointer -> next;
+        delete listPointer;
+        listPointer = next;
+    }
+}
+
 //LinkedList::~LinkedList() {
 //    Node* next;
 //    while(listPointer != nullptr){

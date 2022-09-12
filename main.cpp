@@ -46,7 +46,7 @@ int main(int argc, char** argv) {
 
         // Call Stable Matching Function
         vector<int> pairs;  // defined as index:value = man:woman
-        pairs = stableMatchingAlgorithm(malePreferences, femalePreferenceArr, men, women);
+        pairs = stableMatchingAlgorithm(malePreferences, femalePreferenceArr, men);
 
         // Output
         ofstream outputFS;

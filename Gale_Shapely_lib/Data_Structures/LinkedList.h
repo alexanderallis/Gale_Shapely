@@ -17,11 +17,13 @@ class LinkedList {
         void addTail(int);
         int pop();
         int isEmpty() const;
+        void clearList();
 
     private:
         Node* listPointer{};
         Node* tail{};
         int hasNext() const;
+
 };
 
 
