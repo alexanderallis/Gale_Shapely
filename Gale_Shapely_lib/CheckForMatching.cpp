@@ -17,10 +17,10 @@ bool checkForMatching(std::vector<std::vector<int>> pairs) {
     bool matching = true;
     if(NUM_MEN > 0) {
         for (auto &pair: pairs) {
-            if (++menCount.at(pair.at(0)) > 1) {
+            if (++menCount.at((pair.at(0)) - 1) > 1) {
                 matching = false;
             }
-            if (++womenCount.at(pair.at(1)) > 1) {
+            if (++womenCount.at((pair.at(1)) - 1) > 1) {
                 matching = false;
             }
         }

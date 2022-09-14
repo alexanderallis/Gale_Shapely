@@ -12,7 +12,7 @@
 
 using namespace std;
 
-class MatchingFixture : public ::testing::Test {
+class StabilityTestFixture : public ::testing::Test {
 
 protected:
     virtual void SetUp()
@@ -66,11 +66,11 @@ protected:
     vector<LinkedList> malePreferences;
     vector<vector<int>> malePreferenceVector;
     vector<vector<int>> femalePreferences;
-    static const int NUM_MEN = 1000;  // Establish n = number of men = number of women
+    static const int NUM_MEN = 5;  // Establish n = number of men = number of women
     int men[NUM_MEN];
 };
 
-TEST_F(MatchingFixture, matchingTest) {
+TEST_F(StabilityTestFixture, matchingTest) {
 
     vector<int> pairs = stableMatchingAlgorithm(malePreferences, femalePreferences, men);
 
@@ -88,7 +88,7 @@ TEST_F(MatchingFixture, matchingTest) {
 
 }
 
-TEST_F(MatchingFixture, stabilityTest) {
+TEST_F(StabilityTestFixture, stabilityTest) {
 
     // Call Stable Matching Function
     // defined as index:value = man:woman

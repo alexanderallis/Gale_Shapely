@@ -1,3 +1,13 @@
+/*
+ * Alexander Allis
+ * 09/13/22
+ *
+ * Purpose: This program executes the Gale-Shapely Algorithm
+ * for a pool of men and women, both of size n. It also checks
+ * male, female pairs for matching, perfection, and stability.
+ *
+ */
+
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -14,13 +24,18 @@ using namespace std;
 int main(int argc, char** argv) {
 
     // Get arguments from console
-    for (int i = 0; i < argc; ++i)
-        cout << "arg " << i << ": " << argv[i] << "\n";
-
     string programType = argv[1];
     string maleFileName = argv[2];
     string femaleFileName = argv[3];
     string fourthArg = argv[4];
+
+    if (programType == "stable") cout << "Checking for Stability: " << argv[1] << endl;
+    if (programType == "check") cout << "Checking for Integrity of Pairs in " << argv[4] << endl;
+
+    cout << "Male Preferences: " << maleFileName << endl;
+    cout << "Female Preferences: " << femaleFileName << endl;
+
+    if(programType == "stable") cout << "Output File: " << fourthArg << endl;
 
     // Read Male Preferences File
     vector<LinkedList> malePreferences;
@@ -69,24 +84,32 @@ int main(int argc, char** argv) {
 
         // Check for matching
         bool matching = checkForMatching(pairs);
-        if(matching) cout << "Matching property holds" << endl;
-        else cout << "Matching property does not hold" << endl;
+        if(matching) cout << endl << "MATCHING PROPERTY HOLDS" << endl;
+        else cout << endl << "MATCHING PROPERTY DOES NOT HOLD" << endl;
 
         // Check for perfection
-        bool perfect;
-        if(NUM_MEN == NUM_WOMEN) perfect = true;
-        else{ cout << "The matching set S does not hold the property of perfection." << endl; }
+        bool perfect = false;
+        if(NUM_MEN == NUM_WOMEN) {
+            perfect = true;
+            cout << endl << "THE MATCHING SET S IS A PERFECT MATCHING" << endl;
+        }
+        else{
+            cout << endl << "THE MATCHING SET S DOES NOT HOLD THE PROPERTY OF PERFECTION" << endl;
+        }
 
         // Check pair stability if matching & perfection are true
         if(matching && perfect) {
             vector<vector<int>> unstablePairs = checkPairStability(&malePreferencesArr, &femalePreferenceArr, &pairs);
-            cout << "Unstable Pairs:" << endl;
-            for(auto & unstablePair : unstablePairs) {
-                // Add 1 to unstable pairs to offset zero-indexing
-                cout << unstablePair.at(0) + 1 << " and " << unstablePair.at(1) + 1 << " will elope" << endl;
+            if(!unstablePairs.empty()) {
+                cout << endl << "THE MATCHING SET S IS NOT STABLE" << endl;
+                cout << "Unstable Pairs:" << endl;
+                for(auto & unstablePair : unstablePairs) {
+                    // Add 1 to unstable pairs to offset zero-indexing
+                    cout << "Man " << unstablePair.at(0) + 1 << " and Woman " << unstablePair.at(1) + 1 << " will elope." << endl;
+                }
             }
-            if( unstablePairs.empty()) {
-                cout << "No unstable pairs" << endl;
+            else {
+                cout << endl << "No unstable pairs" << endl;
             }
         }
     }

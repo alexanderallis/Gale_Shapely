@@ -25,7 +25,10 @@ vector<int> stableMatchingAlgorithm (std::vector<LinkedList> malePreferences, st
 
     // List of free men
     Stack freeMen(NUM_MEN);
-    for (int i = 0; i < NUM_MEN; i++) freeMen.push(menArr[i]);
+    for (int i = 0; i < NUM_MEN; i++) {
+        int x = menArr[i];
+        freeMen.push(x);
+    }
 
     int highestWoman;
     int freeMan = freeMen.pop();
