@@ -40,6 +40,7 @@ vector<vector<int>> checkPairStability(std::vector<std::vector<int>>* malePrefer
                 unstablePairs.emplace_back(vector<int>());
                 unstablePairs.back().emplace_back(i);
                 unstablePairs.back().emplace_back(prefWoman);
+                return unstablePairs;  // Returning only one unstable pair, per the project instructions.
             }
         }
     }
