@@ -9,7 +9,7 @@
  * To Compile:
  *  Run "cmake ." in root directory
  *  Run "make"
- *  Run "Gale_Shapely [Program Type] [Male Preferences] [Female Preferences] [Output File]"
+ *  Run "./Gale_Shapely [Program Type] [Male Preferences] [Female Preferences] [Output File]"
  */
 
 #include <iostream>
