@@ -1,14 +1,29 @@
 //
 // Created by Alexander Allis on 9/12/22.
 //
-#include <iostream>
+
 #include <vector>
 
 using namespace std;
 
+/*
+ * Checks a vector of pairs for the matching property. Pairs are held in a 2D vector.
+ * Args:
+ *  A 2D vector of pairs (integers)
+ * Return:
+ *  Boolean value. If matching property holds, return true, else false.
+ */
+
 bool checkForMatching(std::vector<std::vector<int>> pairs) {
 
-    int NUM_MEN = (int) pairs.size();
+    // Find the largest number in the pairs to get a max number of individuals
+    int NUM_MEN = 0;
+    for(auto pair : pairs) {
+        if(pair.at(0) > NUM_MEN) NUM_MEN = pair.at(0);
+        if(pair.at(1) > NUM_MEN) NUM_MEN = pair.at(1);
+    }
+
+    NUM_MEN++;  // Increment because of zero-indexing
 
     vector<int> menCount(NUM_MEN);
     fill(menCount.begin(), menCount.end(), 0);

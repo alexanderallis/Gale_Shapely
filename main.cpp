@@ -6,6 +6,10 @@
  * for a pool of men and women, both of size n. It also checks
  * male, female pairs for matching, perfection, and stability.
  *
+ * To Compile:
+ *  Run "cmake ." in root directory
+ *  Run "make"
+ *  Run "Gale_Shapely [Program Type] [Male Preferences] [Female Preferences] [Output File]"
  */
 
 #include <iostream>
@@ -21,7 +25,21 @@
 
 using namespace std;
 
+void printHelp() {
+    cout << endl;
+    cout << "HELP:" << endl;
+    cout << "Correct Format: [Name of Executable] [Program Type] [Male Preferences] [Female Preferences] [Output File]" << endl;
+    cout << "Program Type: \"stable\" or \"check\"" << endl;
+    cout << "Male Preferences, Female Preferences, Output File must be .txt files." << endl;
+    cout << endl;
+}
+
 int main(int argc, char** argv) {
+
+    if(argc != 5) {
+        printHelp();
+        return 1;
+    }
 
     // Get arguments from console
     string programType = argv[1];
@@ -30,7 +48,12 @@ int main(int argc, char** argv) {
     string fourthArg = argv[4];
 
     if (programType == "stable") cout << "Checking for Stability: " << argv[1] << endl;
-    if (programType == "check") cout << "Checking for Integrity of Pairs in " << argv[4] << endl;
+    else if (programType == "check") cout << "Checking for Integrity of Pairs in " << argv[4] << endl;
+    else {
+        cout << "Choose \"stable\" or \"check\"" << endl;
+        printHelp();
+        return 1;
+    }
 
     cout << "Male Preferences: " << maleFileName << endl;
     cout << "Female Preferences: " << femaleFileName << endl;
@@ -95,6 +118,8 @@ int main(int argc, char** argv) {
         }
         else{
             cout << endl << "THE MATCHING SET S DOES NOT HOLD THE PROPERTY OF PERFECTION" << endl;
+            if(NUM_MEN > NUM_WOMEN) cout << "There are too many men" << endl;
+            if(NUM_WOMEN > NUM_MEN) cout << "There are too many women" << endl;
         }
 
         // Check pair stability if matching & perfection are true
@@ -109,7 +134,7 @@ int main(int argc, char** argv) {
                 }
             }
             else {
-                cout << endl << "No unstable pairs" << endl;
+                cout << endl << "NO UNSTABLE PAIRS" << endl;
             }
         }
     }

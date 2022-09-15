@@ -26,6 +26,4 @@ class LinkedList {
 
 };
 
-
-
 #endif //GALE_SHAPELY_LINKEDLIST_H

@@ -2,9 +2,7 @@
 // Created by Alexander Allis on 9/1/22.
 //
 
-#include <iostream>
 #include <vector>
-
 #include "Node.h"
 #include "LinkedList.h"
 
@@ -66,13 +64,3 @@ void LinkedList::clearList() {
         listPointer = next;
     }
 }
-
-//LinkedList::~LinkedList() {
-//    Node* next;
-//    while(listPointer != nullptr){
-//        next = listPointer -> next;
-//        delete listPointer;
-//        listPointer = next;
-//    }
-
-

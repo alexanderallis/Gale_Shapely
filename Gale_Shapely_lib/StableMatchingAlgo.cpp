@@ -7,13 +7,16 @@
 
 using namespace std;
 
-vector<int> stableMatchingAlgorithm (std::vector<LinkedList> malePreferences, std::vector<std::vector<int>> invertedFemalePreferenceArr, int* menArr) {
+/*
+ * Returns a list of stable matching pairs based on male and female preferences.
+ * Args:
+ *  malePreferences: A vector of male preferences, each man's preference is stored as a singly linked list.
+ *  femalePreferences: A 2D vector of female preferences [woman][man] = preference rank.
+ * Return:
+ *  A vector of wifes for each man's index. vector.at(man) = wife.
+ */
 
-    /*
-     * -----------------------------------------
-     * ------- Stable Matching Algorithm -------
-     * -----------------------------------------
-    */
+vector<int> stableMatchingAlgorithm (std::vector<LinkedList> malePreferences, std::vector<std::vector<int>> invertedFemalePreferenceArr, int* menArr) {
 
     int NUM_MEN = (int) malePreferences.size();
 

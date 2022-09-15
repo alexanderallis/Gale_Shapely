@@ -6,9 +6,6 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-#include <fstream>
-#include <sstream>
-
 #include "read_file.h"
 #include "Data_Structures/LinkedList.h"
 
@@ -40,7 +37,8 @@ vector<vector<int>>* fileToVector(vector<vector<int>>* arr, std::string* fileNam
     getline(fileStream, line);  // Consume first line
     int numberOfMen = stoi(line);
 
-    while(!fileStream.eof()) {  // Loop through lines
+//    while(!fileStream.eof()) {  // Loop through lines
+    for(int i = 0; i < numberOfMen; i++) {  // Loop number of times = number of men specified at beginning of file.
 
         getline(fileStream, line);
 

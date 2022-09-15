@@ -88,14 +88,13 @@ TEST_F(MatchingTestFixture, matchingTestPolygamyFive) {
     ASSERT_TRUE(checkForMatching(testPairs));
 
 }
+TEST_F(MatchingTestFixture, matchingTestExtraNumber) {
 
-//TEST_F(MatchingTestFixture, matchingTestExtraNumber) {
-//
-//    vector<vector<int>> testPairs;
-//    testPairs = {{1, 1},
-//                 {4, 2},
-//                 {3, 2}};
-//
-//    ASSERT_FALSE(checkForMatching(testPairs));
-//
-//}
+    vector<vector<int>> testPairs;
+    testPairs = {{1, 1},
+                 {4, 2},
+                 {3, 2}};
+
+    ASSERT_FALSE(checkForMatching(testPairs));
+
+}

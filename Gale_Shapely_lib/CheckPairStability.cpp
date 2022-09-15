@@ -3,10 +3,19 @@
 //
 
 #include <vector>
-
 #include "CheckPairStability.h"
 
 using namespace std;
+
+/*
+ * Checks a vector of vector pairs for the stability property.
+ * Args:
+ *  malePreferences: a 2d vector of male preferences [man][preference (most to least preferred)] = woman
+ *  femaleInvertedPreferences: a 2d vector of female preferences [woman][man] = rank
+ *  pairs: a 2d vector of pairs
+ * Returns:
+ *  A 2d vector of ordered pairs. Modified on line 51 to return only 1 pair.
+ */
 
 vector<vector<int>> checkPairStability(std::vector<std::vector<int>>* malePreferences, std::vector<std::vector<int>>* femaleInvertedPreferences, std::vector<std::vector<int>>* pairs) {
 

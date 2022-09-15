@@ -1,15 +1,23 @@
 //
 // Created by Alexander Allis on 9/5/22.
 //
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include<string>
 #include<vector>
-
 #include "getPairsFromFile.h"
 
 using namespace std;
+
+/*
+ * Retrieve pairs from an output file and return a 2D vector of pairs.
+ * Args:
+ *  arr: A pointer to a 2D array to store the output
+ *  fileName: a pointer to the path to the file to be read.
+ * Return:
+ *  Pointer to the 2D array of pairs.
+ */
 
 vector<vector<int>>* getPairsFromFile(vector<vector<int>>* arr, std::string *fileName) {
 
@@ -61,6 +69,14 @@ vector<vector<int>>* getPairsFromFile(vector<vector<int>>* arr, std::string *fil
     return arr;
 
 }
+
+/*
+ * Inverts a 2D vector. [woman][preference rank] = man ==> [woman][man] = preference rank.
+ * Args:
+ *  list: a 2D vector to be inverted.
+ * Return:
+ *  Pointer to the 2D inverted vector.
+ */
 
 vector<vector<int>>* invertList(vector<vector<int>>* list) {
     unsigned int size = list -> size();
