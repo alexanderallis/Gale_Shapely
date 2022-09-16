@@ -3,6 +3,6 @@ project(Gale_Shapely)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Gale_Shapely main.cpp Gale_Shapely_lib/Data_Structures/LinkedList.cpp Gale_Shapely_lib/Data_Structures/LinkedList.h Gale_Shapely_lib/Data_Structures/Node.cpp Gale_Shapely_lib/Data_Structures/Node.h Gale_Shapely_lib/Data_Structures/Stack.cpp Gale_Shapely_lib/Data_Structures/Stack.h Gale_Shapely_lib/read_file.cpp Gale_Shapely_lib/read_file.h Gale_Shapely_lib/StableMatchingAlgo.cpp Gale_Shapely_lib/StableMatchingAlgo.h Gale_Shapely_lib/getPairsFromFile.cpp Gale_Shapely_lib/getPairsFromFile.h Gale_Shapely_lib/CheckPairStability.cpp Gale_Shapely_lib/CheckPairStability.h Gale_Shapely_lib/CheckForMatching.cpp Gale_Shapely_lib/CheckForMatching.h)
+add_executable(Gale_Shapely main.cpp LinkedList.cpp LinkedList.h Node.cpp Node.h Stack.cpp Stack.h read_file.cpp read_file.h StableMatchingAlgo.cpp StableMatchingAlgo.h getPairsFromFile.cpp getPairsFromFile.h CheckPairStability.cpp CheckPairStability.h CheckForMatching.cpp CheckForMatching.h)
 
 add_subdirectory(Google_tests)

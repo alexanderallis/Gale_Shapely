@@ -3,7 +3,7 @@
 //
 
 #include "StableMatchingAlgo.h"
-#include "Data_Structures/Stack.h"
+#include "Stack.h"
 
 using namespace std;
 

@@ -6,7 +6,7 @@
 #define GALE_SHAPELY_STABLEMATCHINGALGO_H
 
 #include <vector>
-#include "Data_Structures/LinkedList.h"
+#include "LinkedList.h"
 
 std::vector<int> stableMatchingAlgorithm (std::vector<LinkedList>, std::vector<std::vector<int>>, int[]);
 

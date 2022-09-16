@@ -16,12 +16,12 @@
 #include <fstream>
 #include <vector>
 
-#include "Gale_Shapely_lib/Data_Structures/LinkedList.h"
-#include "Gale_Shapely_lib/read_file.h"
-#include "Gale_Shapely_lib/StableMatchingAlgo.h"
-#include "Gale_Shapely_lib/getPairsFromFile.h"
-#include "Gale_Shapely_lib/CheckPairStability.h"
-#include "Gale_Shapely_lib/CheckForMatching.h"
+#include "LinkedList.h"
+#include "read_file.h"
+#include "StableMatchingAlgo.h"
+#include "getPairsFromFile.h"
+#include "CheckPairStability.h"
+#include "CheckForMatching.h"
 
 using namespace std;
 

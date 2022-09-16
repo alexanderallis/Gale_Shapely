@@ -6,9 +6,9 @@
 #include <random>
 #include <vector>
 #include "../Gale_Shapely_lib/Data_Structures/LinkedList.h"
-#include "../Gale_Shapely_lib/StableMatchingAlgo.h"
-#include "../Gale_Shapely_lib/CheckPairStability.h"
-#include "../Gale_Shapely_lib/CheckForMatching.h"
+#include "../StableMatchingAlgo.h"
+#include "../CheckPairStability.h"
+#include "../CheckForMatching.h"
 
 using namespace std;
 
