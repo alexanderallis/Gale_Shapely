@@ -4,8 +4,10 @@
 ### GALE-SHAPELY ALGORITHM
 
 Limitations:
--This program accepts only .txt files
--All numbers must be separated by a space or a carriage return
+
+*This program accepts only .txt files
+
+*All numbers must be separated by a space or a carriage return
 in the input files.
 
 To Compile:
