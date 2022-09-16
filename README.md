@@ -9,11 +9,14 @@ Limitations:
 in the input files.
 
 To Compile:
--Run 
+
+Run 
 >cmake .
+
 in the project root directory.
 
--Run 
+Run 
 >make
--Run 
+> 
+Run 
 >./Gale_Shapely [Program Type] [Male Preferences] [Female Preferences] [Output File]
